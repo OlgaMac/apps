@@ -1,11 +1,7 @@
-DROP TABLE IF EXISTS genres CASCADE;
-
 CREATE TABLE genres (
                         id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
                         name varchar NOT NULL UNIQUE
 );
-
-DROP TABLE IF EXISTS authors CASCADE;
 
 CREATE TABLE authors (
     --                        обязательные поля
@@ -16,8 +12,6 @@ CREATE TABLE authors (
                          dateOfDeath varchar,
                          description varchar
 );
-
-DROP TABLE IF EXISTS books CASCADE;
 
 CREATE TABLE books (
 --                        обязательные поля
@@ -31,8 +25,6 @@ CREATE TABLE books (
                        description varchar
 
 );
-
-DROP TABLE IF EXISTS clients CASCADE;
 
 CREATE TABLE clients (
                          id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -48,7 +40,6 @@ CREATE TABLE clients (
                          favoriteGenre varchar
 
 );
-DROP TABLE IF EXISTS orders CASCADE;
 
 CREATE TABLE orders (
                         id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
