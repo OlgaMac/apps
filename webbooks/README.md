@@ -38,7 +38,7 @@ create database <DB_NAME>;
 ```
 4. восстановить демо-данные в базе
 ```bash
-sudo -u postgres psql <DB_NAME> < src/main/resources/V20240714_data.sql>
+sudo -u postgres psql <DB_NAME> < src/main/resources/V20240714_init_DB.sql>
 ```
 
 ### Конфигурация базы данных для сборки в Maven
@@ -58,7 +58,7 @@ DB.url=jdbc:postgresql://localhost:5432/<DB_NAME>
 DB.user=postgres
 DB.password=password
 ```
-`src/main/resources/V20240714_data.sql` содержит демо-данные для БД.
+`src/main/resources/V20240714_init_DB.sql` содержит демо-данные для БД.
 
 <a name="functions"></a>
 
