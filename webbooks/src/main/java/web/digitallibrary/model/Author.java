@@ -13,6 +13,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.lang.NonNull;
 
+import javax.annotation.processing.Generated;
+
 @Data
 public class Author {
     @NonNull

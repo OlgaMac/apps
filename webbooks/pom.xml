@@ -96,7 +96,17 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <user>postgres</user>
+                    <password>password</password>
+                    <schemas>
+                        <schema>db_webbooks</schema>
+                    </schemas>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
