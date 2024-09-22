@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>DigitalLibrary</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>DigitalLibrary</name>
     <description>DigitalLibrary</description>
     <properties>
@@ -119,7 +119,7 @@
         <repository>
             <id>github</id>
             <name>GitHub ${GITHUB_REPO_OWNER}</name>
-            <url>https://maven.pkg.github.com/OlgaMac/apps</url>
+            <url>https://maven.pkg.github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}</url>
         </repository>
     </distributionManagement>
 </project>
