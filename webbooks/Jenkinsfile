@@ -32,9 +32,12 @@ pipeline {
         }
 
         stage('Upload') {
+           when {
+                expression { BRANCH_NAME == "master" }
+            }
             steps {
                 dir('webbooks') {
-                    sh "mvn -B -DskipTests -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
+                    sh "mvn -DskipTests -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
                 }
             }
         }
@@ -42,7 +45,7 @@ pipeline {
 
     post {
         success {
-            dir('apps/webbooks') {
+            dir('webbooks') {
                 junit 'target/surefire-reports/*.xml'
                 archiveArtifacts 'target/*.jar'
             }
