@@ -138,12 +138,12 @@
         <repository>
             <id>github</id>
             <name>GitHub ${GITHUB_REPO_OWNER}</name>
-            <url>https://maven.pkg.github.com/${GITHUB_REPO_OWNER}</url>
+            <url>https://maven.pkg.github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}</url>
         </repository>
         <snapshotRepository>
             <id>github-snapshots</id>
             <name>GitHub Snapshots</name>
-            <url>https://maven.pkg.github.com/${GITHUB_REPO_OWNER}</url>
+            <url>https://maven.pkg.github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
