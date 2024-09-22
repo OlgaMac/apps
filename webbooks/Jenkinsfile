@@ -39,6 +39,7 @@ pipeline {
                     sh "mvn -DskipTests -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
                 }
             }
+          }
         }
     }
 
