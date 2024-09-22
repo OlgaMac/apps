@@ -31,9 +31,14 @@ pipeline {
             }
         }
 
+        stage('Branch') {
+                    steps {
+                        echo env.BRANCH_NAME
+                    }
+                }
+
         stage('Upload') {
             when {
-                 echo env.BRANCH_NAME
                  expression { env.BRANCH_NAME == "master" }
                   }
 
