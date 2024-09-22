@@ -17,15 +17,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('apps/webbooks') {
-                    sh "mvn -B -Dversion.application=${env.VERSION} clean package"
+                dir('webbooks') {
+                    sh "mvn -B -DskipTests -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} clean package"
                 }
             }
         }
 
         stage('Test') {
             steps {
-                dir('apps/webbooks') {
+                dir('webbooks') {
                     sh 'mvn test'
                 }
             }
@@ -33,7 +33,7 @@ pipeline {
 
         stage('Upload') {
             steps {
-                dir('apps/webbooks') {
+                dir('webbooks') {
                     sh "mvn -DskipTests -s settings.xml -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
                 }
             }
