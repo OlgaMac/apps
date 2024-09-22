@@ -119,7 +119,7 @@
         <repository>
             <id>github</id>
             <name>GitHub ${GITHUB_REPO_OWNER}</name>
-            <url>https://maven.pkg.github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}</url>
+            <url>https://maven.pkg.github.com/OlgaMac/apps</url>
         </repository>
     </distributionManagement>
 </project>
