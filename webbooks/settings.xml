@@ -4,7 +4,7 @@
                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
     <servers>
         <server>
-            <id>github</id>
+            <id>git-hub</id>
             <username>${GITHUB_REPO_CRED_USR}</username>
             <password>${GITHUB_REPO_CRED_PSW}</password>
         </server>
