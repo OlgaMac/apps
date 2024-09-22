@@ -33,7 +33,7 @@ pipeline {
 
         stage('Upload') {
            when {
-                expression { BRANCH_NAME == "master" }
+                expression { BRANCH_NAME == "main" }
             }
             steps {
                 dir('webbooks') {
@@ -47,7 +47,7 @@ pipeline {
         success {
             dir('webbooks') {
                 junit 'target/surefire-reports/*.xml'
-
+                archiveArtifacts 'target/*.jar'
             }
         }
     }
