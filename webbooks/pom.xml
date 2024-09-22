@@ -10,9 +10,10 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>DigitalLibrary</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
     <name>DigitalLibrary</name>
     <description>DigitalLibrary</description>
+    <packaging>jar</packaging>
+    <version>${version.application}</version>
     <properties>
         <java.version>17</java.version>
     </properties>
