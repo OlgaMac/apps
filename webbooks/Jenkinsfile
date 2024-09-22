@@ -18,7 +18,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('apps/webbooks') {
-                    sh "mvn -B -DskipTests -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} clean package"
+                    sh "mvn -B -Dversion.application=${env.VERSION} clean package"
                 }
             }
         }
