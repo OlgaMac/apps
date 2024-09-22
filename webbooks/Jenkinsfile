@@ -34,7 +34,7 @@ pipeline {
         stage('Upload') {
             steps {
                 dir('webbooks') {
-                    sh "mvn -DskipTests -s settings.xml -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
+                    sh "mvn -B -DskipTests -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
                 }
             }
         }
