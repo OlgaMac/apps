@@ -32,14 +32,15 @@ pipeline {
         }
 
         stage('Upload') {
-           if(expression { env.BRANCH_NAME == "master" }){
+            when {
+                 expression { env.BRANCH_NAME == "master" }
+                  }
 
             steps {
                 dir('webbooks') {
                     sh "mvn -DskipTests -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
                 }
             }
-          }
         }
     }
 
