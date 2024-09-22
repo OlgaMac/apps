@@ -32,6 +32,7 @@ pipeline {
         }
 
         stage('Upload') {
+            echo env.BRANCH_NAME
             when {
                  expression { env.BRANCH_NAME == "master" }
                   }
