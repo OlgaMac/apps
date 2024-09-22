@@ -31,12 +31,6 @@ pipeline {
             }
         }
 
-        stage('Branch') {
-                    steps {
-                        echo env.GIT_BRANCH
-                    }
-                }
-
         stage('Upload') {
             when {
                  expression { env.GIT_BRANCH == "origin/master" }
@@ -44,7 +38,7 @@ pipeline {
 
             steps {
                 dir('webbooks') {
-                    sh "mvn -DskipTests -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} install"
+                    sh "mvn -DskipTests -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
                 }
             }
         }
