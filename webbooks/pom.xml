@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>DigitalLibrary</artifactId>
+    <artifactId>digital-library</artifactId>
     <name>DigitalLibrary</name>
-    <description>DigitalLibrary</description>
+    <description>digital-library</description>
     <packaging>jar</packaging>
     <version>${version.application}</version>
     <properties>
