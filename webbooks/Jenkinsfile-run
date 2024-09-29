@@ -18,7 +18,7 @@ pipeline {
 
                    sshagent(credentials: [sshCredentialsId]) {
                        sh """
-                           ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'cd ${remotePath}'
+                           ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
                            curl -o ${remotePath}/${jarFileName} ${jarUrl}
                            ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/${jarFileName}'
                        """
