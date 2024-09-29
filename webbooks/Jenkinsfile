@@ -42,7 +42,7 @@ pipeline {
                 }
             }
         }
-
+//
 //         stage('Deploy') {
 //                             steps {
 //                                 script {
@@ -51,7 +51,7 @@ pipeline {
 //
 //                                     // Запускаем другую задачу с параметрами
 //                                     build wait: false, propagate: false,
-//                                         job: '/projects/build-project',
+//                                         job: 'job/ci-test/',
 //                                         parameters: [
 //                                             string(name: 'ARTIFACT', value: artifactPath)
 //                                         ]
@@ -66,6 +66,12 @@ pipeline {
                 junit 'target/surefire-reports/*.xml'
                 archiveArtifacts 'target/*.jar'
             }
+             // Запускаем другую задачу с параметрами
+            build wait: false, propagate: false,
+                job: 'job/ci-test/',
+                parameters: [
+                    string(name: 'ARTIFACT', value: artifactPath)
+                                                    ]
         }
     }
 }
