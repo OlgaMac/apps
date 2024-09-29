@@ -4,23 +4,22 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                    // Укажите ID ваших учетных данных
+                script {
                     def sshCredentialsId = 'ssh-olga'
                     def vmIp = '127.0.0.1'
                     def remotePath = 'apps/webbooks' // Путь на ВМ
                     def jarFileName = "digital-library-${env.VERSION}.jar"
                     def jarUrl = "http://localhost:8080/${jarFileName}"
 
-                    // Подключение к ВМ и выполнение команд
-                     sshagent(credentials : [sshCredentialsId]) {
-                        sh """
-                            ssh ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
-                            curl -o ${remotePath}/*.jar ${jarUrl}
-                            ssh ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/*.jar'
-                        """
-                          }
-                     }
-
+                   sshagent('ssh-olga') {
+                       sh """
+                           ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
+                           curl -o ${remotePath}/${jarFileName} ${jarUrl}
+                           ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/${jarFileName}'
+                       """
+                   }
+                }
+            }
         }
     }
 }
