@@ -13,7 +13,7 @@ pipeline {
                     def jarUrl = "http://localhost:8080/${jarFileName}"
 
                     // Подключение к ВМ и выполнение команд
-                     sshagent(credentials : [sshCredentialsId]) {
+                     ssh agent(credentials : [sshCredentialsId]) {
                         sh """
                             ssh ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
                             curl -o ${remotePath}/*.jar ${jarUrl}
