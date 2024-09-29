@@ -6,16 +6,16 @@ pipeline {
             steps {
                 script {
                     // Укажите ID ваших учетных данных
-                    def sshCredentialsId = 'ssh-olga'
+                    def sshCredentialsId = credentials("ssh-olga")
                     def vmIp = '127.0.0.1'
-                    def remotePath = 'https://github.com/OlgaMac/apps.git'
-                    def jarUrl = 'https://github.com/OlgaMac/apps/packages'
+                    def remotePath = 'http:localhost:8080/'
+                    def jarUrl = 'http:localhost:8080/digital-library-${env.VERSION}.jar'
 
                     // Подключение к ВМ и выполнение команд
                     ssh agent([sshCredentialsId]) {
                         sh """
                             ssh ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
-                            curl -o ${remotePath}/app.jar ${jarUrl}
+                            curl -o ${remotePath}/*.jar ${jarUrl}
                             ssh ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/*.jar'
                         """
                           }
