@@ -12,9 +12,9 @@ pipeline {
                     def jarFileName = "digital-library-${env.VERSION}.jar"
                     def jarUrl = "http://localhost:8080/${jarFileName}"
 
-                    // Подключение к ВМ и выполнение команд
-                    sshagent([sshCredentialsId]) {
-                        sh """
+                     // Использование withCredentials для SSH
+                     withCredentials([sshUserPrivateKey(credentialsId: sshCredentialsId, keyVariable: 'SSH_KEY')]) {
+                              sh """
                             ssh ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
                             curl -o ${remotePath}/*.jar ${jarUrl}
                             ssh ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/*.jar'
