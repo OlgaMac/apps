@@ -42,30 +42,21 @@ pipeline {
                 }
             }
         }
-
-//         stage('Deploy') {
-//                             steps {
-//                                 script {
-//                                     // Ваши шаги сборки здесь, например:
-//                                     def artifactPath = 'webbooks/target/*.jar'
-//
-//                                     // Запускаем другую задачу с параметрами
-//                                     build wait: false, propagate: false,
-//                                         job: '/projects/build-project',
-//                                         parameters: [
-//                                             string(name: 'ARTIFACT', value: artifactPath)
-//                                         ]
-//                                 }
-//                             }
-//                         }
     }
 
     post {
-        success {
-            dir('webbooks') {
-                junit 'target/surefire-reports/*.xml'
-                archiveArtifacts 'target/*.jar'
+            success {
+                dir('webbooks') {
+                    junit 'target/surefire-reports/*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
+
+                // Запускаем другую задачу с параметрами
+                build wait: false, propagate: false,
+                    job: 'ci-deploy-run',
+                    parameters: [
+                        string(name: 'ARTIFACT', value: 'target/*.jar')
+                    ]
             }
         }
     }
-}
