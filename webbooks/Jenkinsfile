@@ -42,6 +42,22 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy') {
+                            steps {
+                                script {
+                                    // Ваши шаги сборки здесь, например:
+                                    def artifactPath = 'webbooks/target/*.jar'
+
+                                    // Запускаем другую задачу с параметрами
+                                    build wait: false, propagate: false,
+                                        job: '/projects/build-project',
+                                        parameters: [
+                                            string(name: 'ARTIFACT', value: artifactPath)
+                                        ]
+                                }
+                            }
+                        }
     }
 
     post {
@@ -51,21 +67,5 @@ pipeline {
                 archiveArtifacts 'target/*.jar'
             }
         }
-
-        stage('Deploy') {
-                    steps {
-                        script {
-                            // Ваши шаги сборки здесь, например:
-                            def artifactPath = 'webbooks/target/*.jar'
-
-                            // Запускаем другую задачу с параметрами
-                            build wait: false, propagate: false,
-                                job: '/projects/build-project',
-                                parameters: [
-                                    string(name: 'ARTIFACT', value: artifactPath)
-                                ]
-                        }
-                    }
-                }
     }
 }
