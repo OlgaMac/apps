@@ -51,12 +51,13 @@ pipeline {
                 archiveArtifacts 'target/*.jar'
             }
 
-            def artifactPath = 'webbooks/target/*.jar'
+            def artifactPath = 'target/*.jar'
              // Запускаем другую задачу с параметрами
             build wait: false, propagate: false,
                 job: 'job/ci-deploy-run/',
                 parameters: [
                     string(name: 'ARTIFACT', value: artifactPath)
+                    ]
                                                     ]
         }
     }
