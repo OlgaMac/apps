@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+            SSH_USER = 'olga'
+        }
+
     stages {
         stage('Deploy') {
             steps {
