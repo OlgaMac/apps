@@ -8,12 +8,12 @@ pipeline {
                     // Укажите ID ваших учетных данных
                     def sshCredentialsId = 'ssh-olga'
                     def vmIp = '127.0.0.1'
-                    def remotePath = '/path/to/remote/directory' // Путь на ВМ
+                    def remotePath = 'apps/webbooks' // Путь на ВМ
                     def jarFileName = "digital-library-${env.VERSION}.jar"
                     def jarUrl = "http://localhost:8080/${jarFileName}"
 
                     // Подключение к ВМ и выполнение команд
-                    ssh agent(sshCredentialsId) {
+                    sshagent([sshCredentialsId]) {
                         sh """
                             ssh ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
                             curl -o ${remotePath}/*.jar ${jarUrl}
