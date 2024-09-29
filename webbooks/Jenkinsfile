@@ -40,13 +40,13 @@ pipeline {
                 dir('webbooks') {
                     sh "mvn -DskipTests -s settings.xml -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
                 }
-            }
 
-            build wait: false, propagate: false,
-                                job: 'ci-deploy-run',
-                                parameters: [
-                                    string(name: 'ARTIFACT', value: 'target/*.jar')
-                                ]
+                build wait: false, propagate: false,
+                                                job: 'ci-deploy-run',
+                                                parameters: [
+                                                    string(name: 'ARTIFACT', value: 'target/*.jar')
+                                                ]
+            }
         }
     }
 
