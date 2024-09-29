@@ -12,11 +12,11 @@ pipeline {
                     def jarUrl = 'https://github.com/OlgaMac/apps/packages'
 
                     // Подключение к ВМ и выполнение команд
-                    sshagent([sshCredentialsId]) {
+                    ssh agent([sshCredentialsId]) {
                         sh """
                             ssh ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
                             curl -o ${remotePath}/app.jar ${jarUrl}
-                            ssh ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/app.jar'
+                            ssh ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/*.jar'
                         """
                           }
                         }
