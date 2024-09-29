@@ -33,7 +33,7 @@ pipeline {
 
         stage('Upload') {
             when {
-                 expression { env.GIT_BRANCH == "origin/master" }
+                 expression { BRANCH_NAME == "master" }
                   }
 
             steps {
@@ -49,6 +49,10 @@ pipeline {
                 dir('webbooks') {
                     junit 'target/surefire-reports/*.xml'
                     archiveArtifacts 'target/*.jar'
+                }
+
+                when {
+                    expression { BRANCH_NAME == "master" }
                 }
 
                 // Запускаем другую задачу с параметрами
