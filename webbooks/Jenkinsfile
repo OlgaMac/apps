@@ -50,15 +50,13 @@ pipeline {
                     junit 'target/surefire-reports/*.xml'
                     archiveArtifacts 'target/*.jar'
                 }
-                steps {
-                def artifactPath = 'target/*.jar'
+
                 // Запускаем другую задачу с параметрами
                 build wait: false, propagate: false,
                     job: 'job/ci-deploy-run/',
                     parameters: [
-                        string(name: 'ARTIFACT', value: artifactPath)
+                        string(name: 'ARTIFACT', value: 'target/*.jar')
                     ]
-                }
             }
         }
     }
