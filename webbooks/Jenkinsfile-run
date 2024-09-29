@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-            when {
                 script {
                     // Укажите ID ваших учетных данных
                     def sshCredentialsId = 'ssh-olga'
@@ -19,9 +18,9 @@ pipeline {
                             curl -o ${remotePath}/app.jar ${jarUrl}
                             ssh ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/app.jar'
                         """
+                          }
+                        }
                     }
-                }
-            }
         }
     }
 }
