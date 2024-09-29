@@ -11,7 +11,7 @@ pipeline {
                     def jarFileName = "digital-library-${env.VERSION}.jar"
                     def jarUrl = "http://localhost:8080/${jarFileName}"
 
-                   sshagent('ssh-olga') {
+                   sshagent(['ssh-olga']) {
                        sh """
                            ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
                            curl -o ${remotePath}/${jarFileName} ${jarUrl}
