@@ -33,13 +33,19 @@ pipeline {
 
         stage('Upload') {
             when {
-                 expression { env.GIT_BRANCH == "origin/master" }
+                 expression { BRANCH_NAME == "master" }
                   }
 
             steps {
                 dir('webbooks') {
                     sh "mvn -DskipTests -s settings.xml -Dmaven.repo.local=${MAVEN_REPO_PATH} -Dversion.application=${env.VERSION} deploy"
                 }
+
+                build wait: false, propagate: false,
+                                                job: 'ci-deploy-run',
+                                                parameters: [
+                                                    string(name: 'ARTIFACT', value: 'target/*.jar')
+                                                ]
             }
         }
     }
@@ -50,13 +56,6 @@ pipeline {
                     junit 'target/surefire-reports/*.xml'
                     archiveArtifacts 'target/*.jar'
                 }
-
-                // Запускаем другую задачу с параметрами
-                build wait: false, propagate: false,
-                    job: 'ci-deploy-run',
-                    parameters: [
-                        string(name: 'ARTIFACT', value: 'target/*.jar')
-                    ]
             }
         }
     }
