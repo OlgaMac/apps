@@ -3,7 +3,7 @@ pipeline {
 
     environment {
             SSH_USER = 'olga'
-            VERSION = "1.0.${BUILD_NUMBER}"
+            VERSION = "1.0.${BUILD_NUMBER.toInteger() - 4}"
         }
 
     stages {
