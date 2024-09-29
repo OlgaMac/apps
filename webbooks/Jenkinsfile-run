@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                script {
                     // Укажите ID ваших учетных данных
                     def sshCredentialsId = 'ssh-olga'
                     def vmIp = '127.0.0.1'
@@ -13,15 +12,15 @@ pipeline {
                     def jarUrl = "http://localhost:8080/${jarFileName}"
 
                     // Подключение к ВМ и выполнение команд
-                     ssh agent(credentials : [sshCredentialsId]) {
+                     sshagent(credentials : [sshCredentialsId]) {
                         sh """
                             ssh ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
                             curl -o ${remotePath}/*.jar ${jarUrl}
                             ssh ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/*.jar'
                         """
                           }
-                        }
-                    }
+                     }
+
         }
     }
 }
