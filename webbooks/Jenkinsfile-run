@@ -6,10 +6,11 @@ pipeline {
             steps {
                 script {
                     // Укажите ID ваших учетных данных
-                    def sshCredentialsId = credentials("ssh-olga")
+                    def sshCredentialsId = 'ssholga'
                     def vmIp = '127.0.0.1'
-                    def remotePath = 'http:localhost:8080/'
-                    def jarUrl = 'http:localhost:8080/digital-library-${env.VERSION}.jar'
+                    def remotePath = '/path/to/remote/directory' // Путь на ВМ
+                    def jarFileName = "digital-library-${env.VERSION}.jar"
+                    def jarUrl = "http://localhost:8080/${jarFileName}"
 
                     // Подключение к ВМ и выполнение команд
                     ssh agent([sshCredentialsId]) {
