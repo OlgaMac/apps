@@ -3,6 +3,7 @@ pipeline {
 
     environment {
             SSH_USER = 'olga'
+            VERSION = "1.0.${BUILD_NUMBER}"
         }
 
     stages {
@@ -12,13 +13,14 @@ pipeline {
                     def sshCredentialsId = 'ssh-olga'
                     def vmIp = '127.0.0.1'
                     def remotePath = 'apps/webbooks'
-                    def jarUrl = "http://localhost:8080/*.jar"
+                    def jarFileName = "digital-library-${env.VERSION}.jar"
+                    def jarUrl = "http://localhost:8080/${jarFileName}"
 
                    sshagent(credentials: [sshCredentialsId]) {
                        sh """
                            ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'cd ${remotePath}'
-                           curl -o ${remotePath}/*.jar ${jarUrl}
-                           ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/*.jar'
+                           curl -o ${remotePath}/${jarFileName} ${jarUrl}
+                           ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/${jarFileName}'
                        """
                    }
                 }
