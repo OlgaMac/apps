@@ -53,7 +53,7 @@ pipeline {
 
                 // Запускаем другую задачу с параметрами
                 build wait: false, propagate: false,
-                    job: 'job/ci-deploy-run/',
+                    job: 'ci-deploy-run',
                     parameters: [
                         string(name: 'ARTIFACT', value: 'target/*.jar')
                     ]
