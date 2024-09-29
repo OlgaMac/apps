@@ -45,20 +45,18 @@ pipeline {
     }
 
     post {
-        success {
-            dir('webbooks') {
-                junit 'target/surefire-reports/*.xml'
-                archiveArtifacts 'target/*.jar'
-            }
-
-            def artifactPath = 'target/*.jar'
-             // Запускаем другую задачу с параметрами
-            build wait: false, propagate: false,
-                job: 'job/ci-deploy-run/',
-                parameters: [
-                    string(name: 'ARTIFACT', value: artifactPath)
+            success {
+                dir('webbooks') {
+                    junit 'target/surefire-reports/*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
+                def artifactPath = 'target/*.jar'
+                // Запускаем другую задачу с параметрами
+                build wait: false, propagate: false,
+                    job: 'job/ci-deploy-run/',
+                    parameters: [
+                        string(name: 'ARTIFACT', value: artifactPath)
                     ]
-                                                    ]
+            }
         }
     }
-}
