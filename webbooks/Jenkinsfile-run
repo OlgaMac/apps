@@ -14,7 +14,7 @@ pipeline {
                     def vmIp = '127.0.0.1'
                     def remotePath = 'apps/webbooks'
                     def jarFileName = "digital-library-${env.VERSION}.jar"
-                    def jarUrl = "http://localhost:8080/${jarFileName}"
+                    def jarUrl = "http://localhost:8080/job/ci-test/job/master/lastSuccessfulBuild/artifact/target/${jarFileName}"
 
                    sshagent(credentials: [sshCredentialsId]) {
                        sh """
