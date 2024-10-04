@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-            SSH_USER = 'olga'
-            VERSION = "1.0.${BUILD_NUMBER.toInteger() - 4}"
+          SSH_USER = 'olga'
+          VERSION = "1.0.${BUILD_NUMBER.toInteger() - 3}"
         }
 
     stages {
@@ -18,13 +18,15 @@ pipeline {
 
                    sshagent(credentials: [sshCredentialsId]) {
                        sh """
-                               ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
-                               ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'sudo curl -o ${remotePath}/${jarFileName} ${jarUrl}'
+                             ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'mkdir -p ${remotePath}'
+                             ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'sudo chmod -R 755 apps/webbooks'
 
-                               ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/${jarFileName}'
+                             ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'sudo curl -o ${remotePath}/${jarFileName} ${jarUrl}'
+
+                             ssh -o StrictHostKeyChecking=no ${env.SSH_USER}@${vmIp} 'java -jar ${remotePath}/${jarFileName}'
                            """
                    }
-                }
+               }
             }
         }
     }
